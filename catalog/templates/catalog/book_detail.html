@@ -1,0 +1,33 @@
+{% extends 'basic_template.html' %}
+{% block title %}<title>Book Detail</title>{% endblock %}
+{% block content %}
+    {% if book %}
+    <h1>Title: {{ book.title }}</h1>
+    <ul>
+        <li><strong>ISBN: </strong>{{ book.isbn }}</li>
+        <li><strong>Author: </strong><a href="{{ book.author.get_detail_url }}">{{ book.author }}</a></li>
+        <li><strong>Genre: </strong>{{ book.genre.all|join:", " }}</li>
+    </ul>
+    <h4>Book Intances</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>UUID</td>
+                <td>Imprint</td>
+                <td>Due_Back</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ob in book.bookinstance_set.all %}
+                <tr>
+                    <td>{{ ob.uuid }}</td>
+                    <td>{{ ob.imprint }}</td>
+                    <td>{{ ob.due_back }}</td>
+                    <td>{{ ob.get_status_display }}</td>
+                </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

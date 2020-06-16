@@ -1,0 +1,20 @@
+{% extends 'basic_template.html' %}
+{% block title %}<title>Contact us</title>{% endblock %}
+{% block content %}
+<h1>Contact us</h1>
+<form action="{% url 'contact' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.email.label }}<br>
+        {{ form.email }}
+    </div>
+    <div class="form-group">
+        {{ form.message.label }}<br>
+        {{ form.message }}
+        {% if form.message.errors %}
+        <p class="text-danger">{{ form.message.errors }}</p>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-sm btn-primary">submit</button>
+</form>
+{% endblock %}

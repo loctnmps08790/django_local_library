@@ -1,0 +1,32 @@
+{% extends 'basic_template.html' %}
+{% block title %}<title>Login Page</title>{% endblock %}
+{% block content %}
+<div class="border p-2">
+{% if form.errors %}
+<p class="text-danger">Your's username or password did't match. Please try again</p>
+{% endif %}
+{% if next %}
+    {% if is_authenticated %}
+    <p class="warning">your account doesn't access this page</p>
+    {% else %}
+    <p class="warning">please login to see this page</p>
+    {% endif %}
+{% endif %}
+<form action="{% url 'login' %}"  method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.username.label_tag}}<br>
+        {{ form.username }}
+    </div>
+    <div class="form-group">
+        {{ form.password.label_tag}}<br>
+        {{ form.password }}
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="d-flex">
+        <button type="submit" class="btn btn-sm btn-primary">login</button>
+        <span class="ml-auto"><a href="{% url 'password_reset' %}">Reset Password</a></span>
+    </div>
+</form>
+</div>
+{% endblock %}

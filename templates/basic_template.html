@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Title</title>{% endblock %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item"><a href="{% url 'catalog' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'books' %}" class="nav-link">All Books</a></li>
+                    <li class="nav-item"><a href="{% url 'authors' %}" class="nav-link">All Authors</a></li>
+                    <li class="nav-item"><a href="{% url 'test' %}" class="nav-link">Test</a></li>
+                </ul>
+                <ul class="nav border-top">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="#" class="nav-link">User: {{ user.get_username }}</a></li>
+                    <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact us</a></li>
+                    <li class="nav-item"><a href="{% url 'logout' %}?next={{request.path}}" class="nav-link">Logout</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="{% url 'login' %}?next={{request.path}}" class="nav-link">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                {% block content %}{% endblock %}
+                {% block pagination %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
