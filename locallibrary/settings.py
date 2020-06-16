@@ -25,7 +25,7 @@ SECRET_KEY = '$cj$f3#sat6a*4t!kyk9(q3f6ye2#s-2ek0msqdbz%o2l1@bmg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fathomless-temple-86292.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
